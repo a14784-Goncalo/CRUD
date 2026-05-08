@@ -125,6 +125,7 @@ public class App {
                                 <th>Nome</th>
                                 <th>Email</th>
                                 <th>Telefone</th>
+                                <th>NIF</th>
                                 <th>Ações</th>
                             </tr>
                     """);
@@ -144,14 +145,15 @@ public class App {
                     int id = rs.getInt("id");
                     String nome = rs.getString("nome");
                     String email = rs.getString("email");
-
                     String telefone = rs.getString("telefone");
+                    String NIF = rs.getString("nif");
 
                     html.append("<tr>");
                     html.append("<td>").append(id).append("</td>");
                     html.append("<td>").append(nome).append("</td>");
                     html.append("<td>").append(email).append("</td>");
                     html.append("<td>").append(telefone).append("</td>");
+                    html.append("<td>").append(NIF).append("</td>");
 
                     html.append("<td>");
                     html.append("<a href='/editar?id=").append(id).append("'>Editar</a>");
@@ -210,6 +212,9 @@ public class App {
 
                             Telefone:
                             <input name='telefone'>
+                            
+                            NIF:
+                            <input name='NIF'>
 
                             <button type='submit'>Guardar</button>
                         </form>
@@ -259,6 +264,9 @@ public class App {
                                 break;
                             case "telefone":
                                 telefone = value;
+                                break;
+                            case "NIF":
+                                NIF = value;
                                 break;
                         }
                     }
