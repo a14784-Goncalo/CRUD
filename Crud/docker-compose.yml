@@ -7,7 +7,7 @@ services:
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: clientes_db
+            MYSQL_DATABASE: appdb
             MYSQL_USER: appuser
             MYSQL_PASSWORD: apppass
 
