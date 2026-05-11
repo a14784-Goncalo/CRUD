@@ -146,14 +146,14 @@ public class App {
                     String nome = rs.getString("nome");
                     String email = rs.getString("email");
                     String telefone = rs.getString("telefone");
-                    String NIF = rs.getString("nif");
+                    String nif = rs.getString("nif");
 
                     html.append("<tr>");
                     html.append("<td>").append(id).append("</td>");
                     html.append("<td>").append(nome).append("</td>");
                     html.append("<td>").append(email).append("</td>");
                     html.append("<td>").append(telefone).append("</td>");
-                    html.append("<td>").append(NIF).append("</td>");
+                    html.append("<td>").append(nif).append("</td>");
 
                     html.append("<td>");
                     html.append("<a href='/editar?id=").append(id).append("'>Editar</a>");
@@ -212,7 +212,7 @@ public class App {
 
                             Telefone:
                             <input name='telefone'>
-                            
+
                             NIF:
                             <input name='NIF'>
 
@@ -247,6 +247,7 @@ public class App {
                 String nome = "";
                 String email = "";
                 String telefone = "";
+                String nif = "";
 
                 for (String p : params) {
                     String[] kv = p.split("=");
@@ -266,7 +267,7 @@ public class App {
                                 telefone = value;
                                 break;
                             case "NIF":
-                                NIF = value;
+                                nif = value;
                                 break;
                         }
                     }
@@ -278,12 +279,13 @@ public class App {
                     throw new Exception("Ligação à BD falhou!");
                 }
 
-                String sql = "INSERT INTO clientes(nome,email,telefone) VALUES (?,?,?)";
+                String sql = "INSERT INTO clientes(nome,email,telefone,nif) VALUES (?,?,?,?)";
                 PreparedStatement ps = con.prepareStatement(sql);
 
                 ps.setString(1, nome);
                 ps.setString(2, email);
                 ps.setString(3, telefone);
+                ps.setString(4, nif);
 
                 ps.executeUpdate();
 
@@ -363,6 +365,7 @@ public class App {
                 String nome = rs.getString("nome");
                 String email = rs.getString("email");
                 String telefone = rs.getString("telefone");
+                String nif = rs.getString("nif");
 
                 html.append("""
                             <html>
@@ -387,6 +390,7 @@ public class App {
                 html.append("Nome:<input name='nome' value='").append(nome).append("' required>");
                 html.append("Email:<input name='email' value='").append(email).append("' required>");
                 html.append("Telefone:<input name='telefone' value='").append(telefone).append("'>");
+                html.append("Nif:<input name='nif' value='").append(nif).append("'>");
                 html.append("""
                             <button type='submit'>Atualizar</button>
                             </form>
@@ -431,6 +435,7 @@ public class App {
                 String nome = "";
                 String email = "";
                 String telefone = "";
+                String nif = "";
 
                 for (String p : params) {
                     String[] kv = p.split("=");
@@ -452,6 +457,9 @@ public class App {
                             case "telefone":
                                 telefone = value;
                                 break;
+                            case "nif":
+                                nif = value;
+                                break;
                         }
                     }
                 }
@@ -464,14 +472,15 @@ public class App {
                     throw new Exception("Ligação à BD falhou!");
                 }
 
-                String sql = "UPDATE clientes SET nome=?, email=?, telefone=? WHERE id=?";
+                String sql = "UPDATE clientes SET nome=?, email=?, telefone=?, nif=? WHERE id=?";
 
                 PreparedStatement ps = con.prepareStatement(sql);
 
                 ps.setString(1, nome);
                 ps.setString(2, email);
                 ps.setString(3, telefone);
-                ps.setInt(4, id);
+                ps.setString(4, nif);
+                ps.setInt(5, id);
 
                 ps.executeUpdate();
 
@@ -503,13 +512,11 @@ public class App {
             }
         });
 
-  // ELIMINAR CLIENTE
+        // ELIMINAR CLIENTE
 
         server.createContext("/apagar", exchange -> {
 
-
             StringBuilder html = new StringBuilder();
-
 
             try {
                 String query = exchange.getRequestURI().getQuery();
@@ -537,50 +544,50 @@ public class App {
                 con.close();
 
                 html.append("""
-                    <html>
-                    <head>
-                        <meta charset="UTF-8">
-                        <style>
-                            body { font-family: Arial; }
-                            a { text-decoration: none; }
-                        </style>
-                    </head>
-                    <body>
-                """);
+                            <html>
+                            <head>
+                                <meta charset="UTF-8">
+                                <style>
+                                    body { font-family: Arial; }
+                                    a { text-decoration: none; }
+                                </style>
+                            </head>
+                            <body>
+                        """);
 
                 if (rows > 0) {
                     html.append("""
-                        <h2>Cliente apagado com sucesso!</h2>
-                        <a href='/clientes'>Voltar à lista</a>
-                    """);
+                                <h2>Cliente apagado com sucesso!</h2>
+                                <a href='/clientes'>Voltar à lista</a>
+                            """);
                 } else {
                     html.append("""
-                        <h2>! Cliente não encontrado!</h2>
-                        <a href='/clientes'>Voltar</a>
-                    """);
+                                <h2>! Cliente não encontrado!</h2>
+                                <a href='/clientes'>Voltar</a>
+                            """);
                 }
 
                 html.append("""
-                    </body>
-                    </html>
-                """);
+                            </body>
+                            </html>
+                        """);
 
             } catch (Exception e) {
                 e.printStackTrace();
 
                 html.append("""
-                    <html>
-                    <head>
-                        <meta charset="UTF-8">
-                    </head>
-                    <body>
+                            <html>
+                            <head>
+                                <meta charset="UTF-8">
+                            </head>
+                            <body>
 
-                    <h2>!!! Erro ao apagar cliente!</h2>
-                    <a href='/clientes'>Voltar</a>
+                            <h2>!!! Erro ao apagar cliente!</h2>
+                            <a href='/clientes'>Voltar</a>
 
-                    </body>
-                    </html>
-                """);
+                            </body>
+                            </html>
+                        """);
             }
 
             exchange.getResponseHeaders().set("Content-Type", "text/html; charset=UTF-8");
@@ -588,7 +595,7 @@ public class App {
             exchange.getResponseBody().write(html.toString().getBytes());
 
             exchange.close();
-        }); 
+        });
 
         server.start();
 

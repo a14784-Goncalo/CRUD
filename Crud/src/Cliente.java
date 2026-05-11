@@ -3,7 +3,7 @@ public class Cliente {
     public String nome;
     public String email;
     public String telefone;
-    public int nif;
+    public String nif;
 
     public Cliente(int id, String nome, String email, String telefone) {
         this.id = id;
