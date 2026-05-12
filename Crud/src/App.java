@@ -89,7 +89,7 @@ public class App {
                                 <div class="container">
 
                                 <div class="card">
-                                    <h3>+ Ver Produtos</h3>
+                                    <h3>Ver Produtos</h3>
                                     <p>Consultar lista completa</p>
                                     <a href="/produtos">Abrir</a>
                                 </div>
