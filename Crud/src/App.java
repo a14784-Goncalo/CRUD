@@ -352,7 +352,7 @@ public class App {
             exchange.sendResponseHeaders(200, html.toString().getBytes().length);
             exchange.getResponseBody().write(html.toString().getBytes());
             exchange.close();
-        });   
+        });
 
         // FORM EDITAR CLIENTE
         server.createContext("/editar", exchange -> {
@@ -437,7 +437,7 @@ public class App {
 
             exchange.close();
 
-        }); 
+        });
 
         // ATUALIZAR CLIENTE
         server.createContext("/atualizar", exchange -> {
@@ -528,8 +528,8 @@ public class App {
                 exchange.getResponseBody().write(resp.getBytes());
                 exchange.close();
             }
-        });    
-        
+        });
+
         // ELIMINAR CLIENTE
         server.createContext("/apagar", exchange -> {
 
@@ -612,8 +612,8 @@ public class App {
             exchange.getResponseBody().write(html.toString().getBytes());
 
             exchange.close();
-        });    
-        
+        });
+
         //
         // PRODUTO
         //
@@ -699,7 +699,7 @@ public class App {
             exchange.sendResponseHeaders(200, html.toString().getBytes().length);
             exchange.getResponseBody().write(html.toString().getBytes());
             exchange.close();
-        });        
+        });
 
         // FORM NOVO PRODUTO
         server.createContext("/novoP", exchange -> {
@@ -850,7 +850,7 @@ public class App {
             exchange.getResponseBody().write(html.toString().getBytes());
             exchange.close();
         });
-    
+
         // FORM EDITAR PRODUTO
         server.createContext("/editarP", exchange -> {
 
