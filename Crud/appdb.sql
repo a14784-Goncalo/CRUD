@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Tempo de geração: 08-Maio-2026 às 16:01
+-- Tempo de geração: 12-Maio-2026 às 08:30
 -- Versão do servidor: 8.4.9
 -- versão do PHP: 8.3.26
 
@@ -43,15 +43,37 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id`, `nome`, `email`, `telefone`, `nif`) VALUES
-(1, 'Giovani Simões Trindade', 'a14770@oficina.pt', '123456789', ''),
-(2, 'Tiago Filipe Araújo de Sá', 'a14777@oficina.pt', '123456789', ''),
-(3, 'Salvador Maria Carvalho Ribeiro de Cabral Sacadura', 'a14782@oficina.pt', '123456789', ''),
-(4, 'Gonçalo Oliveira Serra', 'a14784@oficina.pt', '123456789', ''),
-(5, 'Tomás dos Santos Ferreira Stasto', 'a14786@oficina.pt', '123456789', ''),
-(6, 'Davi Marques Costa do Nascimento', 'a14794@oficina.pt', '123456789', ''),
-(7, 'Filipe Cordeiro Portugal', 'a14812@oficina.pt', '123456789', ''),
-(8, 'Simão Rafael Mesquita da Silva Carneiro', 'a14813@oficina.pt', '123456789', ''),
-(9, 'André Marques Rizzon', 'a14816@oficina.pt', '123456789', '');
+(1, 'Giovani Simões Trindade', 'a14770@oficina.pt', '123456789', '987654321'),
+(2, 'Tiago Filipe Araújo de Sá', 'a14777@oficina.pt', '123456789', '987654321'),
+(3, 'Salvador Maria Carvalho Ribeiro de Cabral Sacadura', 'a14782@oficina.pt', '123456789', '987654321'),
+(4, 'Gonçalo Oliveira Serra', 'a14784@oficina.pt', '123456789', '987654321'),
+(5, 'Tomás dos Santos Ferreira Stasto', 'a14786@oficina.pt', '123456789', '987654321'),
+(6, 'Davi Marques Costa do Nascimento', 'a14794@oficina.pt', '123456789', '987654321'),
+(7, 'Filipe Cordeiro Portugal', 'a14812@oficina.pt', '123456789', '987654321'),
+(8, 'Simão Rafael Mesquita da Silva Carneiro', 'a14813@oficina.pt', '123456789', '987654321'),
+(9, 'André Marques Rizzon', 'a14816@oficina.pt', '123456789', '987654321'),
+(10, ' Waner Ribeiro de Souza Filho', 'a14830@oficina.pt', '123456789', '987654321');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `produtos`
+--
+
+DROP TABLE IF EXISTS `produtos`;
+CREATE TABLE `produtos` (
+  `id` int NOT NULL,
+  `refproduto` varchar(100) DEFAULT NULL,
+  `produto` varchar(100) DEFAULT NULL,
+  `preco` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `produtos`
+--
+
+INSERT INTO `produtos` (`id`, `refproduto`, `produto`, `preco`) VALUES
+(1, '1234567890', 'Bolacha Maria', 5);
 
 --
 -- Índices para tabelas despejadas
@@ -64,6 +86,12 @@ ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `produtos`
+--
+ALTER TABLE `produtos`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de tabelas despejadas
 --
 
@@ -71,7 +99,13 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de tabela `produtos`
+--
+ALTER TABLE `produtos`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
