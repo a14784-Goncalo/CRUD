@@ -10,8 +10,13 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
+        
+        //
         // HOME
+        // 
+
         server.createContext("/", exchange -> {
+
 
             String html = """
                         <html>
@@ -665,7 +670,7 @@ public class App {
                     String refProduto = rs.getString("refproduto");
 
                     String produto = rs.getString("produto");
-                    float preco = rs.getInt("preco");
+                    float preco = rs.getFloat("preco");
 
                     html.append("<tr>");
                     html.append("<td>").append(id).append("</td>");
@@ -787,7 +792,7 @@ public class App {
                                 break;
 
                             case "preco":
-                                preco = Integer.parseInt(value);
+                                preco = Float.parseFloat(value);
                                 break;
                         }
                     }
@@ -886,7 +891,7 @@ public class App {
 
                 String refproduto = rs.getString("refproduto");
                 String produto = rs.getString("produto");
-                float preco = rs.getInt("preco");
+                float preco = rs.getFloat("preco");
 
                 html.append("""
                             <html>
@@ -971,7 +976,7 @@ public class App {
                 String idStr = "";
                 String refproduto = "";
                 String produto = "";
-                float preco = 0;
+                float preco = 0f;
 
                 for (String p : params) {
 
@@ -997,7 +1002,7 @@ public class App {
                                 break;
 
                             case "preco":
-                                preco = Integer.parseInt(value);
+                                preco = Float.parseFloat(value);
                                 break;
                         }
                     }
@@ -1011,7 +1016,6 @@ public class App {
                     throw new Exception("Ligação à BD falhou!");
                 }
 
-                // CORRIGIDO
                 String sql = "UPDATE produtos SET refproduto=?, produto=?, preco=? WHERE id=?";
 
                 PreparedStatement ps = con.prepareStatement(sql);
