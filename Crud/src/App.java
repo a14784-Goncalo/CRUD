@@ -676,7 +676,7 @@ public class App {
                     html.append("<td>").append(id).append("</td>");
                     html.append("<td>").append(refProduto).append("</td>");
                     html.append("<td>").append(produto).append("</td>");
-                    html.append("<td>").append(preco).append("</td>");
+                    html.append("<td style='text-align:right;''>").append(preco).append("&euro;</td>");
 
                     html.append("<td>");
 
